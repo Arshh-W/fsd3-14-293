@@ -1,11 +1,8 @@
 import http from 'http';
 
-const server = http.createServer();
-server.on('request', (req, res) => {
-
-    res.write("<h1 style='color: red;'>Welcome to Server Side Programming</h1>");
-    res.write("<h2>Nodmon is tracking the files</h2>");
-    res.end();
+const server = http.createServer((req, res) => {
+    
+    res.end("<h1>SIH Internal</h1>");
 
 })
 
