@@ -1,5 +1,6 @@
 import http from 'http'
 import * as t from './teams.js'
+import parseUrl from 'url'
 
 const sendJson =(res, statusCode, data) => {
     res.writeHead(statusCode, { 'Content-Type': 'application/json' })
@@ -22,13 +23,21 @@ const parseJSONBody =(req)=>{
     });
 };
 const server = http.createServer((req,res) => {
-    if(req.url === '/' && req.method == 'GET') {
+    const parsedUrl = parseUrl.parse(req.url, true);
+    const {method} = req;
+    const { pathname, query } = parsedUrl;
+    console.log("pathname", pathname);
+    console.log("query", query);
+    console.log("method", method);
+    if(pathname=='/api/v1/teams' && method == 'GET') {
         const teams = t.getAllTeams()
         sendJson(res, 200, teams)   
-        res.end()
-    } else {
+       
+    }
+    else{
         sendJson(res, 404, { error: "Not Found" })
     }
+     res.end();
 })
 
 server.listen(5000, ()=>{console.log("SIH server is running on http://localhost:5000")})
