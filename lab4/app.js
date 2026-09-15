@@ -42,6 +42,28 @@ const server = http.createServer((req,res) => {
         return
     }
 
+    if (pathname === '/api/v1/teams' && method === 'PUT') {
+        const id = parseInt(query.id)
+        if (!id) {
+            return sendJson(res, 400, { error: 'Missing team ID in query parameters' })
+        }
+        parseJSONBody(req)
+            .then((teamData) => sendJson(res, 200, t.updateTeamById(id, teamData)))
+            .catch(() => sendJson(res, 400, { error: 'Invalid JSON body' }))
+        return
+    }
+
+    if (pathname === '/api/v1/teams' && method === 'DELETE') {
+        const id = parseInt(query.id)
+        if (!id) {
+            return sendJson(res, 400, { error: 'Missing team ID in query parameters' })
+        }
+        parseJSONBody(req)
+            .then((teamData) => sendJson(res, 200, t.deleteTeamById(id)))
+            .catch(() => sendJson(res, 400, { error: 'Invalid JSON body' }))
+        return
+    }
+
     return sendJson(res, 404, { error: "Not Found" })
 })
 
