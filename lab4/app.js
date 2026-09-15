@@ -52,7 +52,18 @@ const server = http.createServer((req,res) => {
             .catch(() => sendJson(res, 400, { error: 'Invalid JSON body' }))
         return
     }
-
+if (pathname === '/api/v1/teams' && method === 'GET') {
+        const id = parseInt(query.id)
+        if (!id) {
+            return sendJson(res, 400, { error: 'Missing team ID in query parameters' })
+        }
+        const team = t.getTeamById(id)
+        if (!team) {
+            return sendJson(res, 404, { error: 'Team not found' })
+        }
+        return sendJson(res, 200, team)
+    }
+    
     if (pathname === '/api/v1/teams' && method === 'DELETE') {
         const id = parseInt(query.id)
         if (!id) {
