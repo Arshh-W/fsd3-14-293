@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Dead Redemption 2 | The Frontier</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #080808;
+            --red: #b52b1d;
+            --gold: #d3a35c;
+            --white: #f5f1e9;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Roboto Condensed', sans-serif;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 25px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand img {
+            width: 48px;
+            filter: brightness(0) invert(1);
+        }
+
+        .brand span {
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 7% 95px;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg,
+                    rgba(0,0,0,0.88) 0%,
+                    rgba(0,0,0,0.4) 48%,
+                    rgba(0,0,0,0.15) 100%),
+                linear-gradient(0deg,
+                    #080808 0%,
+                    transparent 45%),
+                url("https://i.jeuxactus.com/datas/jeux/r/e/red-dead-redemption-2/xl/red-dead-redemption-2-5bd2fd45ab688.jpg")
+                center / cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            letter-spacing: 5px;
+            color: var(--gold);
+            margin-bottom: 22px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: clamp(58px, 9vw, 125px);
+            line-height: 0.88;
+            font-weight: 700;
+            letter-spacing: -2px;
+            text-shadow: 4px 4px 0 #000;
+        }
+
+        .hero h1 span {
+            color: var(--red);
+            display: block;
+        }
+
+        .hero p {
+            max-width: 430px;
+            color: #d0ccc5;
+            font-size: 16px;
+            line-height: 1.7;
+            margin: 28px 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 28px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #df3b29;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.6);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: black;
+        }
+
+        .hero-bottom {
+            position: absolute;
+            bottom: 28px;
+            right: 7%;
+            color: #aaa;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        /* SECTION */
+        .section {
+            padding: 95px 7%;
+            background: #0b0b0b;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 35px;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(32px, 4vw, 55px);
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .section-title span {
+            color: var(--red);
+        }
+
+        .section-subtitle {
+            color: #777;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        .line {
+            width: 55px;
+            height: 3px;
+            background: var(--red);
+            margin-top: 20px;
+        }
+
+        /* CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            position: relative;
+            height: 380px;
+            overflow: hidden;
+            background: #151515;
+            cursor: pointer;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .card:hover img {
+            transform: scale(1.08);
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg,
+                rgba(0,0,0,0.95),
+                transparent 70%);
+        }
+
+        .card-content {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            z-index: 2;
+        }
+
+        .card-content small {
+            color: var(--gold);
+            font-size: 11px;
+            letter-spacing: 3px;
+        }
+
+        .card-content h3 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 29px;
+            margin-top: 8px;
+        }
+
+        /* STORY */
+        .story {
+            min-height: 500px;
+            padding: 100px 7%;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(90deg, #0b0b0b 25%, rgba(11,11,11,0.5)),
+                url("https://wallpapercrafter.com/th8004/1126086-Arthur-Morgan-Red-Dead-Redemption-2-Rockstar-Games.jpg")
+                center / cover no-repeat;
+        }
+
+        .story-text {
+            max-width: 480px;
+        }
+
+        .story-text h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 50px;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .story-text p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #050505;
+            padding: 45px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-top: 1px solid #222;
+        }
+
+        footer h3 {
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 3px;
+        }
+
+        footer p {
+            color: #666;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 20px 5%;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #090909;
+                flex-direction: column;
+                padding: 25px;
+                gap: 22px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .hero {
+                min-height: 90vh;
+                padding: 0 6% 65px;
+                background-position: 62% center;
+            }
+
+            .hero h1 {
+                font-size: 65px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .section {
+                padding: 65px 6%;
+            }
+
+            .section-header {
+                display: block;
+            }
+
+            .section-subtitle {
+                display: block;
+                margin-top: 18px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                height: 330px;
+            }
+
+            .story {
+                padding: 75px 6%;
+                background-position: 65% center;
+            }
+
+            .story-text h2 {
+                font-size: 42px;
+            }
+
+            footer {
+                padding: 35px 6%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <a href="#" class="brand">
+            <span>ROCKSTAR</span>
+            <span style="color:#b52b1d;">WEST</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/index.html">HOME</a></li>
+            <li><a href="/about.html">ABOUT</a></li>
+            <li><a href="/enquiry.html">ENQUIRY</a></li>
+        </ul>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+            ☰
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="eyebrow">ROCKSTAR GAMES PRESENTS</div>
+
+            <h1>
+                RED DEAD
+                <span>REDEMPTION II</span>
+            </h1>
+
+            <p>
+                America, 1899. Arthur Morgan and the Van der Linde
+                gang are outlaws on the run. Experience an epic
+                tale of life in America's unforgiving heartland.
+            </p>
+
+            <div class="buttons">
+                <a href="#story" class="btn btn-primary">
+                    Explore the world
+                </a>
+
+                <a href="#gallery" class="btn btn-outline">
+                    View gallery →
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-bottom">
+            THE WILD WEST • 1899
+        </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section class="section" id="world">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">
+                    THE <span>FRONTIER</span>
+                </h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="section-subtitle">
+                A WORLD OF OPPORTUNITY & DANGER
+            </div>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <img
+                    src="https://i.jeuxactus.com/datas/jeux/r/e/red-dead-redemption-2/xl/red-dead-redemption-2-5bd2fd45ab688.jpg"
+                    alt="Arthur Morgan riding through the mountains"
+                >
+
+                <div class="card-content">
+                    <small>01 / LANDSCAPE</small>
+                    <h3>The Wilderness</h3>
+                </div>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://cdn.mos.cms.futurecdn.net/2eyEMPBXRrub42GW6uvA4k-1920-80.jpg"
+                    alt="Arthur Morgan overlooking a mountain valley"
+                >
+
+                <div class="card-content">
+                    <small>02 / ADVENTURE</small>
+                    <h3>Into the Wild</h3>
+                </div>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://data.bunkhistory.org/images/6351/rectangle_large"
+                    alt="Arthur Morgan surveying the frontier"
+                >
+
+                <div class="card-content">
+                    <small>03 / FRONTIER</small>
+                    <h3>Life on the Run</h3>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="story" id="story">
+        <div class="story-text">
+            <div class="eyebrow">THE STORY OF AN OUTLAW</div>
+
+            <h2>
+                Outlaws<br>
+                For Life.
+            </h2>
+
+            <p>
+                Follow Arthur Morgan, a senior member of the
+                Van der Linde gang, as he fights to survive
+                in a rapidly changing America.
+            </p>
+
+            <a href="#gallery" class="btn btn-primary">
+                Discover the story →
+            </a>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section" id="gallery">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">
+                    THE <span>GALLERY</span>
+                </h2>
+                <div class="line"></div>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <img
+                    src="https://i.pinimg.com/736x/b5/a4/c8/b5a4c81f0412e22df60984d9e2277817.jpg"
+                    alt="Cowboy silhouette at sunset"
+                >
+                <div class="card-content">
+                    <small>THE FRONTIER</small>
+                    <h3>Sunset</h3>
+                </div>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://cdn.mos.cms.futurecdn.net/2eyEMPBXRrub42GW6uvA4k-1920-80.jpg"
+                    alt="Mountain landscape"
+                >
+                <div class="card-content">
+                    <small>THE JOURNEY</small>
+                    <h3>Mountains</h3>
+                </div>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://data.bunkhistory.org/images/6351/rectangle_large"
+                    alt="Western desert landscape"
+                >
+                <div class="card-content">
+                    <small>THE WEST</small>
+                    <h3>Open Country</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div>
+            <h3>RED DEAD REDEMPTION II</h3>
+            <p>Fan-made website • Not affiliated with Rockstar Games.</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#world">World</a>
+            <a href="#gallery">Gallery</a>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-links a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+            });
+        });
+    </script>
+
+</body>
+</html>

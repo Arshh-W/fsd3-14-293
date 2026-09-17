@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquiry | Red Dead Redemption 2</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #080808;
+            --red: #b52b1d;
+            --gold: #d3a35c;
+            --white: #f5f1e9;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Roboto Condensed', sans-serif;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: relative;
+            width: 100%;
+            z-index: 10;
+            padding: 25px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            background: #000;
+        }
+
+        .brand span {
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            padding: 80px 7% 40px;
+            background: linear-gradient(0deg, #0b0b0b 0%, #080808 100%);
+            border-bottom: 1px solid #222;
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            letter-spacing: 5px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .page-header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(40px, 6vw, 80px);
+            text-transform: uppercase;
+            line-height: 0.9;
+        }
+
+        .page-header h1 span {
+            color: var(--red);
+        }
+
+        /* FORM SECTION */
+        .section {
+            padding: 80px 7%;
+            background: #0b0b0b;
+        }
+
+        .form-container {
+            max-width: 650px;
+            background: #121212;
+            padding: 40px;
+            border: 1px solid #222;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 2px;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            background: #080808;
+            border: 1px solid #333;
+            color: var(--white);
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--red);
+        }
+
+        .btn-submit {
+            padding: 15px 35px;
+            background: var(--red);
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #df3b29;
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #050505;
+            padding: 45px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-top: 1px solid #222;
+        }
+
+        footer h3 {
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 3px;
+        }
+
+        footer p {
+            color: #666;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #090909;
+                flex-direction: column;
+                padding: 25px;
+                gap: 22px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .form-container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <a href="index.html" class="brand">
+            <span>ROCKSTAR</span>
+            <span style="color:#b52b1d;">WEST</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="enquiry.html" class="active">ENQUIRY</a></li>
+        </ul>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <div class="eyebrow">REACH OUT TO THE TELEGRAPH OFFICE</div>
+        <h1>DISPATCH <span>ENQUIRY</span></h1>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="section">
+        <div class="form-container">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Arthur Morgan" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Telegraph / Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="arthur@vanderlinde.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="topic">Enquiry Subject</label>
+                    <select id="topic" name="topic">
+                        <option value="general">General Information</option>
+                        <option value="media">Media & Screenshots</option>
+                        <option value="story">Lore & Story Details</option>
+                        <option value="other">Other Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Send Dispatch →</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div>
+            <h3>RED DEAD REDEMPTION II</h3>
+            <p>Fan-made website • Not affiliated with Rockstar Games.</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="enquiry.html">Enquiry</a>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+    </script>
+</body>
+</html>
